@@ -23,7 +23,8 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, videoUr
         <div className="w-full h-full bg-gray-800 flex items-center justify-center text-white">
           <div className="text-center">
             <Play className="w-16 h-16 mx-auto mb-4 opacity-50" />
-            <p>Demo Video Player</p>
+            <p>Demo Video Player <br />
+            videoUrl: {videoUrl}</p>
             <p className="text-sm opacity-75">Video integration will be added here</p>
           </div>
         </div>

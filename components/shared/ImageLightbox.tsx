@@ -1,6 +1,6 @@
 
 // components/shared/ImageLightbox.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GalleryImage } from '../../lib/data/gallery';
 
@@ -98,6 +98,104 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({
           </p>
         </div>
       </div>
+    </div>
+  );
+};
+
+
+interface ImageLightboxPropsNormal {
+  isOpen: boolean;
+  images: string[];
+  currentIndex: number;
+  onClose: () => void;
+  onNavigate: (direction: "next" | "prev") => void;
+}
+
+export const ImageLightboxNormal: React.FC<ImageLightboxPropsNormal> = ({
+  isOpen,
+  images,
+  currentIndex,
+  onClose,
+  onNavigate,
+}) => {
+  const touchStartX = useRef<number | null>(null);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowLeft") {
+        onNavigate("prev");
+      } else if (e.key === "ArrowRight") {
+        onNavigate("next");
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose, onNavigate]);
+
+  // Touch/swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diffX = touchStartX.current - touchEndX;
+
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        onNavigate("next"); // swipe left → next
+      } else {
+        onNavigate("prev"); // swipe right → prev
+      }
+    }
+    touchStartX.current = null;
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-6 text-white text-3xl font-light hover:text-gray-300"
+      >
+        ✕
+      </button>
+
+      {/* Prev */}
+      <button
+        onClick={() => onNavigate("prev")}
+        className="absolute left-4 text-white text-4xl font-light hover:text-gray-300"
+      >
+        ‹
+      </button>
+
+      {/* Image */}
+      <img
+        src={images[currentIndex]}
+        alt="lightbox"
+        className="max-w-full max-h-full object-contain"
+      />
+
+      {/* Next */}
+      <button
+        onClick={() => onNavigate("next")}
+        className="absolute right-4 text-white text-4xl font-light hover:text-gray-300"
+      >
+        ›
+      </button>
     </div>
   );
 };

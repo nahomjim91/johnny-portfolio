@@ -33,7 +33,7 @@ export const Contact = () => {
         </div>
 
         <div className="text-gray-400 text-sm">
-          Currently booking 2024-2025 weddings worldwide
+          Currently booking {new Date().getFullYear()-1 } to {new Date().getFullYear()} weddings worldwide
         </div>
       </div>
     </section>

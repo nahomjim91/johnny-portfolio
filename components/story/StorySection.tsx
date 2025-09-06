@@ -1,5 +1,6 @@
 // components/story/StorySection.tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { ImageLightboxNormal } from "../shared/ImageLightbox";
 
 interface StorySectionProps {
   title: string;
@@ -10,9 +11,26 @@ interface StorySectionProps {
 export const StorySection: React.FC<StorySectionProps> = ({
   title,
   description,
-  images
+  images,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const handleLightboxClose = () => setLightboxOpen(false);
+
+  const handleLightboxNavigate = (direction: "next" | "prev") => {
+    setCurrentImageIndex((prevIndex) => {
+      if (direction === "next") {
+        return (prevIndex + 1) % images.length;
+      }
+      return (prevIndex - 1 + images.length) % images.length;
+    });
+  };
 
   return (
     <section className="py-16">
@@ -26,12 +44,13 @@ export const StorySection: React.FC<StorySectionProps> = ({
           </p>
         </div>
 
+        {/* Image grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {images.map((image, index) => (
-            <div 
+            <div
               key={index}
               className="group cursor-pointer overflow-hidden aspect-[4/5] bg-gray-100"
-              onClick={() => setSelectedImage(image)}
+              onClick={() => handleImageClick(index)}
             >
               <img
                 src={image}
@@ -43,26 +62,15 @@ export const StorySection: React.FC<StorySectionProps> = ({
         </div>
       </div>
 
-      {/* Simple Modal for Selected Image */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-4xl max-h-full">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 text-xl"
-            >
-              ✕
-            </button>
-            <img
-              src={selectedImage}
-              alt="Selected image"
-              className="max-w-full max-h-full object-contain"
-            />
-          </div>
-        </div>
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <ImageLightboxNormal
+          isOpen={lightboxOpen}
+          images={images}
+          currentIndex={currentImageIndex}
+          onClose={handleLightboxClose}
+          onNavigate={handleLightboxNavigate}
+        />
       )}
     </section>
   );

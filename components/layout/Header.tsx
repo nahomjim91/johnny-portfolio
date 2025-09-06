@@ -10,13 +10,7 @@ export const Header = () => {
           <div className="text-2xl font-serif font-bold tracking-wide">
             Johnny Video Production
           </div>
-          <div className="hidden md:flex space-x-8 text-sm font-medium">
-            <a href="#home" className="hover:text-amber-600 transition-colors">Home</a>
-            <a href="#work" className="hover:text-amber-600 transition-colors">Work</a>
-            <a href="/gallery" className="hover:text-amber-600 transition-colors">Gallery</a>
-            <a href="#about" className="hover:text-amber-600 transition-colors">About</a>
-            <a href="#contact" className="hover:text-amber-600 transition-colors">Contact</a>
-          </div>
+
           <div className="flex items-center space-x-4">
             <a href="https://instagram.com/johnny_video_production" target="_blank" rel="noopener noreferrer">
               <Instagram className="w-5 h-5 hover:text-amber-600 transition-colors" />
