@@ -120,3 +120,142 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #0A0A0A;
+  background-color: #FEFEFE;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8941F;
+}
+
+/* Selection */
+::selection {
+  background-color: #D4AF37;
+  color: white;
+}
+
+/* Focus Styles */
+.focus-visible:focus {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes parallax {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.parallax {
+  animation: parallax 20s ease-in-out infinite alternate;
+}
+
+/* Custom Components */
+.btn-primary {
+  @apply bg-black text-white px-8 py-4 hover:bg-gray-800 transition-colors duration-300 font-medium;
+}
+
+.btn-secondary {
+  @apply border border-black text-black px-8 py-4 hover:bg-black hover:text-white transition-all duration-300 font-medium;
+}
+
+.btn-accent {
+  @apply bg-amber-600 text-white px-8 py-4 hover:bg-amber-700 transition-colors duration-300 font-medium;
+}
+
+.card-hover {
+  @apply transition-all duration-500 hover:shadow-2xl hover:scale-105;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent;
+}
+
+/* Typography */
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-accent {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Layout Utilities */
+.section-padding {
+  @apply py-24;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-6;
+}
+
+/* Image Effects */
+.image-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+}
+
+.image-zoom {
+  @apply transition-transform duration-700 group-hover:scale-110;
+}
+
+/* Loading States */
+.skeleton {
+  @apply animate-pulse bg-gray-200;
+}
+
+.skeleton-text {
+  @apply h-4 bg-gray-200 rounded;
+}
+
+.skeleton-image {
+  @apply aspect-video bg-gray-200 rounded-lg;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .mobile-menu {
+    @apply fixed inset-x-0 top-0 z-50 bg-white shadow-lg transform transition-transform duration-300;
+  }
+  
+  .mobile-menu.closed {
+    @apply -translate-y-full;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
