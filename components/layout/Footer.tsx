@@ -172,21 +172,8 @@ const isInView = useInView(ref, { once: true, amount: "some" });
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1, delay: 1 }}
           >
-            <span className="text-sm">Made with</span>
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                color: ["#ef4444", "#f97316", "#ef4444"]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Heart className="w-4 h-4" fill="currentColor" />
-            </motion.div>
-            <span className="text-sm">for couples worldwide</span>
+                      <a href='https://selihom.vercel.app' target='_blank'>  Build by Selihom Kidane</a>
+
           </motion.div>
         </motion.div>
       </div>
