@@ -1,4 +1,4 @@
-// app/gallery/page.tsx
+// app/gallery/page.tsx (Next.js App Router)
 'use client';
 
 import React, { useState, useMemo } from 'react';

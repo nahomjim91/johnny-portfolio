@@ -46,6 +46,10 @@ export const weddingsData: Wedding[] = [
         'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1594736797933-d0d3a4fc671a?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&h=600&fit=crop',
         'https://images.unsplash.com/photo-1594736797933-d0d3a4fc671a?w=800&h=600&fit=crop'
       ],
       reception: [

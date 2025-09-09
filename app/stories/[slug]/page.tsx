@@ -1,9 +1,9 @@
-
 // app/stories/[slug]/page.tsx (Next.js App Router)
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useParams } from 'next/navigation';
+import { motion, useInView } from 'framer-motion';
 import { Header } from '../../../components/layout/Header';
 import { Footer } from '../../../components/layout/Footer';
 import { StoryHero } from '../../../components/story/StoryHero';
@@ -17,6 +17,8 @@ import { weddingsData } from '@/lib/data/wedding';
 const StoryPage = () => {
   const params = useParams();
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const wedding = useMemo(() => {
     return weddingsData.find(w => w.slug === params.slug);
@@ -35,15 +37,30 @@ const StoryPage = () => {
 
   if (!wedding) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
+      <motion.div 
+        className="min-h-screen bg-white flex items-center justify-center over"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h1 className="text-2xl font-serif mb-4">Story Not Found</h1>
           <p className="text-gray-600 mb-8">The wedding story you&apos;re looking for doesn&apos;t exist.</p>
-          <a href="/gallery" className="bg-black text-white px-6 py-3 hover:bg-gray-800 transition-colors">
+          <motion.a 
+            href="/gallery" 
+            className="bg-black text-white px-6 py-3 hover:bg-gray-800 transition-colors inline-block"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
             View All Stories
-          </a>
-        </div>
-      </div>
+          </motion.a>
+        </motion.div>
+      </motion.div>
     );
   }
 
@@ -62,11 +79,24 @@ const StoryPage = () => {
     details: "The carefully chosen elements that make each wedding unique - from rings to flowers to cultural traditions."
   };
 
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.8, staggerChildren: 0.3 }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <motion.div 
+      className="min-h-screen bg-white"
+      initial="hidden"
+      animate="visible"
+      variants={pageVariants}
+    >
       <Header />
       
-      <main>
+      <main ref={ref}>
         <StoryHero
           couples={wedding.couples}
           location={wedding.location}
@@ -76,16 +106,32 @@ const StoryPage = () => {
         />
 
         {/* Love Story Section */}
-        <section className="py-24 bg-white">
+        <motion.section 
+          className="py-24 bg-white"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="font-serif text-3xl md:text-4xl mb-8 font-light">
+            <motion.h2 
+              className="font-serif text-3xl md:text-4xl mb-8 font-light"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+            >
               Their Love Story
-            </h2>
-            <div className="prose prose-lg mx-auto text-gray-700 leading-relaxed">
+            </motion.h2>
+            <motion.div 
+              className="prose prose-lg mx-auto text-gray-700 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
               <p>{wedding.loveStory}</p>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Gallery Sections */}
         {Object.entries(wedding.images).map(([section, images], index) => (
@@ -94,8 +140,9 @@ const StoryPage = () => {
               title={section}
               description={sectionDescriptions[section as keyof typeof sectionDescriptions]}
               images={images}
+              index={index}
             />
-            {index < Object.entries(wedding.images).length - 1 && <hr className="border-gray-200" />}
+
           </React.Fragment>
         ))}
 
@@ -109,16 +156,32 @@ const StoryPage = () => {
 
         {/* Testimonial Section */}
         {wedding.testimonial && (
-          <section className="py-24 bg-gray-50">
+          <motion.section 
+            className="py-24 bg-gray-50"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             <div className="max-w-4xl mx-auto px-6 text-center">
-              <blockquote className="text-2xl md:text-3xl font-light leading-relaxed mb-8 text-gray-800">
+              <motion.blockquote 
+                className="text-2xl md:text-3xl font-light leading-relaxed mb-8 text-gray-800"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                whileHover={{ scale: 1.02 }}
+              >
                 &quot;{wedding.testimonial.text}&quot;
-              </blockquote>
-              <div className="text-lg font-medium text-amber-600">
+              </motion.blockquote>
+              <motion.div 
+                className="text-lg font-medium text-amber-600"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
                 {wedding.testimonial.author}
-              </div>
+              </motion.div>
             </div>
-          </section>
+          </motion.section>
         )}
 
         {/* Story Navigation */}
@@ -126,20 +189,21 @@ const StoryPage = () => {
           previousStory={previousStory}
           nextStory={nextStory}
         />
-
         {/* Contact CTA */}
         <Contact />
-      </main>
 
-      <Footer />
+        {/* Video Modal */}
+        {isVideoModalOpen && (
+          <VideoModal
+            isOpen={isVideoModalOpen}
+            videoUrl={wedding.videos.highlight}
+            onClose={handleCloseModal}
+          />
+        )}
+      </main>
+            <Footer />
       
-      <VideoModal 
-        isOpen={isVideoModalOpen} 
-        onClose={handleCloseModal}
-        videoUrl={wedding.videos.highlight}
-      />
-    </div>
+    </motion.div>
   );
 };
-
 export default StoryPage;

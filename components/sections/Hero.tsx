@@ -191,22 +191,7 @@ export const Hero: React.FC<HeroProps> = ({ onVideoPlay }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <motion.button 
-            onClick={onVideoPlay}
-            className="flex items-center space-x-3 bg-white/20 backdrop-blur-sm border border-white/30 px-8 py-4 hover:bg-white/30 transition-all duration-300 group"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="group-hover:animate-none"
-            >
-              <Play className="w-5 h-5" />
-            </motion.div>
-            <span className="font-medium">Watch Our Story</span>
-          </motion.button>
+         
 
           <motion.a 
             href="#work" 

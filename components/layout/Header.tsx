@@ -3,11 +3,10 @@
 // components/layout/Header.tsx
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Instagram, Mail, Menu, X } from 'lucide-react';
+import { Instagram, Mail} from 'lucide-react';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   
   const headerBackground = useTransform(
@@ -88,7 +87,8 @@ export const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <motion.div 
+          <motion.a 
+            href="/" 
             className="text-2xl font-serif font-bold tracking-wide cursor-pointer"
             variants={logoVariants}
             initial="initial"
@@ -107,7 +107,7 @@ export const Header = () => {
             >
               Johnny Video Production
             </motion.span>
-          </motion.div>
+          </motion.a>
 
           <div className="flex items-center space-x-4">
             <motion.a 
@@ -143,7 +143,7 @@ export const Header = () => {
             </motion.a>
 
             <motion.button 
-              className="bg-black text-white px-6 py-2 text-sm hover:bg-gray-800 transition-colors"
+              className="bg-black text-white px-6 py-2 text-sm hover:bg-gray-800 transition-colors rounded-lg"
               variants={buttonVariants}
               initial="initial"
               animate="animate"

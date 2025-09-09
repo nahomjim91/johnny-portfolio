@@ -4,6 +4,52 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Quote, Heart, Star } from 'lucide-react';
 
+interface TestimonialData {
+  text: string;
+  author: string;
+}
+
+interface TestimonialProps {
+  testimonial: TestimonialData;
+}
+
+export const Testimonial: React.FC<TestimonialProps> = ({ testimonial }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  return (
+    <motion.section 
+      ref={ref}
+      className="py-32 bg-gray-50"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 1 }}
+    >
+      <motion.div 
+        className="max-w-4xl mx-auto px-6 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <motion.blockquote 
+          className="text-3xl md:text-4xl font-light leading-relaxed mb-12 text-gray-800 italic"
+          whileHover={{ scale: 1.02 }}
+        >
+          &quot;{testimonial.text}&quot;
+        </motion.blockquote>
+        <motion.div 
+          className="text-xl font-medium text-amber-600"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+        >
+          {testimonial.author}
+        </motion.div>
+      </motion.div>
+    </motion.section>
+  );
+};
 export const Testimonials = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const ref = useRef(null);
