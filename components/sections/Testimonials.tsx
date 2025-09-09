@@ -190,7 +190,7 @@ export const Testimonials = () => {
               color: "#d97706",
               transition: { duration: 0.3 }
             }}
-          >
+          > 
             What Couples Say
           </motion.h2>
           <motion.div 

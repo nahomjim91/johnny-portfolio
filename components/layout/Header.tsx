@@ -66,7 +66,6 @@ export const Header = () => {
     },
     hover: {
       scale: 1.05,
-      backgroundColor: "#374151",
       transition: { duration: 0.2 }
     },
     tap: {
@@ -143,7 +142,7 @@ export const Header = () => {
             </motion.a>
 
             <motion.button 
-              className="bg-black text-white px-6 py-2 text-sm hover:bg-gray-800 transition-colors rounded-lg"
+              className="bg-black text-white px-6 py-2 text-sm hover:bg-gradient-to-r from-amber-500 to-amber-700 transition-colors rounded-lg"
               variants={buttonVariants}
               initial="initial"
               animate="animate"

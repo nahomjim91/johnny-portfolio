@@ -93,7 +93,7 @@ export const StorySection: React.FC<StorySectionProps> = ({
   return (
     <motion.section 
       ref={ref}
-      className="py-16 overflow-clip"
+      className="py-12 overflow-clip"
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
@@ -106,15 +106,19 @@ export const StorySection: React.FC<StorySectionProps> = ({
             className="text-center"
             variants={headerVariants}
           >
+
             <motion.h2 
               className="font-serif text-3xl md:text-4xl mb-4 font-light capitalize"
-              whileHover={{ scale: 1.02, color: "#d97706" }}
-              transition={{ duration: 0.3 }}
+ whileHover={{
+              scale: 1.05,
+              color: "#d97706",
+              transition: { duration: 0.3 }
+            }}              transition={{ duration: 0.3 }}
             >
               {title}
             </motion.h2>
             <motion.p 
-              className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
+              className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}

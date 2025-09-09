@@ -38,7 +38,7 @@ const StoryPage = () => {
   if (!wedding) {
     return (
       <motion.div 
-        className="min-h-screen bg-white flex items-center justify-center over"
+        className="min-h-screen bg-white flex items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -53,7 +53,7 @@ const StoryPage = () => {
           <p className="text-gray-600 mb-8">The wedding story you&apos;re looking for doesn&apos;t exist.</p>
           <motion.a 
             href="/gallery" 
-            className="bg-black text-white px-6 py-3 hover:bg-gray-800 transition-colors inline-block"
+            className="bg-black text-white px-6 py-3 hover:bg-gradient-to-r from-amber-500 to-amber-700 transition-colors inline-block rounded-lg"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -114,16 +114,20 @@ const StoryPage = () => {
         >
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.h2 
-              className="font-serif text-3xl md:text-4xl mb-8 font-light"
+              className="font-serif text-4xl md:text-5xl mb-3 font-light"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.02 }}
+             whileHover={{
+              scale: 1.05,
+              color: "#d97706",
+              transition: { duration: 0.3 }
+            }}
             >
               Their Love Story
             </motion.h2>
             <motion.div 
-              className="prose prose-lg mx-auto text-gray-700 leading-relaxed"
+            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -132,7 +136,7 @@ const StoryPage = () => {
             </motion.div>
           </div>
         </motion.section>
-
+ 
         {/* Gallery Sections */}
         {Object.entries(wedding.images).map(([section, images], index) => (
           <React.Fragment key={section}>

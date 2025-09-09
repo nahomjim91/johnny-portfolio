@@ -202,41 +202,6 @@ export const FeaturedWork = () => {
                   }}
                 />
 
-                {/* Play Button - Always visible on mobile, hover on desktop */}
-                <motion.div 
-                  className="absolute inset-0 flex items-center justify-center md:opacity-0"
-                  initial={{ opacity: 1, scale: 1 }}
-                  whileHover={{
-                    opacity: 1,
-                    scale: 1,
-                    transition: { duration: 0.3, ease: "easeOut" }
-                  }}
-                >
-                  <motion.div 
-                    className="bg-white/20 backdrop-blur-sm border border-white/30 p-4 rounded-full"
-                    whileHover={{
-                      scale: 1.1,
-                      backgroundColor: "rgba(255,255,255,0.3)",
-                      transition: { duration: 0.2 }
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                    animate={{
-                      scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <motion.div
-                      animate={{ rotate: [0, 5, -5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Play className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
 
                 {/* Content Overlay - Always visible on mobile, hover on desktop */}
                 <motion.div 
@@ -303,10 +268,10 @@ export const FeaturedWork = () => {
         >
           <motion.a 
             href="/gallery"
-            className="inline-flex items-center space-x-2 bg-black text-white px-8 py-4 hover:bg-gray-800 transition-colors rounded-lg"
+            className="inline-flex items-center space-x-2 bg-black text-white px-8 py-4 hover:bg-gradient-to-r from-amber-500 to-amber-700 transition-colors rounded-lg"
             whileHover={{
               scale: 1.05,
-              backgroundColor: "#374151",
+              // backgroundColor: "#374151",
               transition: { duration: 0.3 }
             }}
             whileTap={{ scale: 0.95 }}

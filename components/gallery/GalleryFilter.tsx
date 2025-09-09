@@ -18,7 +18,7 @@ export const GalleryFilter: React.FC<GalleryFilterProps> = ({
         <button
           key={category}
           onClick={() => onFilterChange(category)}
-          className={`px-6 py-2 text-sm font-medium capitalize transition-colors ${
+          className={`px-6 py-2 text-sm font-medium capitalize transition-colors rounded-lg ${
             activeCategory === category
               ? 'bg-amber-600 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

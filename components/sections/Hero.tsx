@@ -195,7 +195,7 @@ export const Hero: React.FC<HeroProps> = ({ onVideoPlay }) => {
 
           <motion.a 
             href="#work" 
-            className="flex items-center space-x-2 text-white border-b border-white/50 pb-1 hover:border-white transition-colors"
+            className="flex items-center space-x-2 text-white border-b border-white/50 pb-1 hover:border-amber-400 hover:text-amber-400 transition-colors"
             variants={buttonVariants}
             whileHover={{
               x: 10,
